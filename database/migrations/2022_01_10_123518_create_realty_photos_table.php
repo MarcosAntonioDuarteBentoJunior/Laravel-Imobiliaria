@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateRealtyPhotosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('realty_photos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('image_path');
+            $table->unsignedInteger('realty_id');
+
+            $table->foreign('realty_id')->references('id')->on('realties')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('realty_photos');
+    }
+}
